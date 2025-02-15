@@ -1,0 +1,37 @@
+# server/.htaccess
+# Deny access to .env file
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Deny access to .htaccess file
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Deny access to files with specific extensions
+<FilesMatch "\.(key|pem|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect directory listing
+Options -Indexes
+
+# Protect against XSS attacks
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set Content-Security-Policy "default-src 'self'"
+</IfModule>
+
+# Redirect all requests to index
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
