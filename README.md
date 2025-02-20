@@ -69,7 +69,7 @@ oauth2-project/
 ### Langkah-Langkah Instalasi
 1. **Clone Proyek**
    ```sh
-   git clone https://github.com/username/oauth2-project.git
+   git clone https://github.com/adrikyyy/oauth2-project.git
    cd oauth2-project
    ```
 
